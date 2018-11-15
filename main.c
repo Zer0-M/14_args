@@ -24,27 +24,28 @@ char ** parse_arg(char* line) {
 }
 
 int main() {
-
-	printf("testing on \"ls -l\"\n");
-	char arg[50] = "ls -l";
-	char ** hm = parse_arg(arg); 
-	int i = 2;
+	printf("testing parsing on \"fortune | cowsay | lolcat\"\n");
+	char arg0[50] = "fortune | cowsay | lolcat";
+	char ** hm0 = parse_arg(arg0); 
+	int i = 5;
 	while (i) {
-		printf("%d: %s \n", 2-i, hm[2-i]);
+		printf("%d: %s \n", 5-i, hm0[5-i]);
 		i--;
 	}
-	free(hm);
+	free(hm0);
 
+	printf("testing prsing and executing with \"ls -l\"\n");
+	char arg1[50] = "ls -a -l";
+	char ** hm1 = parse_arg(arg1); 
+	i = 3;
+	while (i) {
+		printf("%d: %s \n", 3-i, hm1[3-i]);
+		i--;
+	}
+	execvp(hm1[0],hm1);
+	free(hm1);
 	printf("\n");
 
-	printf("testing on \"fortune | cowsay | lolcat\"\n");
-	char arg2[50] = "fortune | cowsay | lolcat";
-	char ** hm2 = parse_arg(arg2); 
-	i = 5;
-	while (i) {
-		printf("%d: %s \n", 5-i, hm2[5-i]);
-		i--;
-	}
-	free(hm2);
+
 	return 0;
 }
